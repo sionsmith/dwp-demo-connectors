@@ -3,3 +3,4 @@ kind: Kustomization
 namespace: team-alpha
 resources:
   - connect-cluster.yaml
+  - demo-connector.yaml

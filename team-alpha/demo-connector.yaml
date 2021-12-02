@@ -1,0 +1,21 @@
+apiVersion: platform.confluent.io/v1beta1
+kind: Connector
+metadata:
+  name: replicator
+  namespace: destination
+spec:
+  name: connector
+  class: "io.confluent.connect.s3.S3SinkConnector"
+  taskMax: 1
+  configs:
+    topic: "s3_topic"
+    s3.region: "eu-west-2"
+    s3.bucket.name: "test"
+    s3.part.size: "5242880"
+    flush.size: "3"
+    storage.class: "io.confluent.connect.s3.storage.S3Storage"
+    format.class: "io.confluent.connect.s3.format.avro.AvroFormat"
+    partitioner.class: "io.confluent.connect.storage.partitioner.DefaultPartitioner"
+    schema.compatibility: "NONE"
+    tls:
+      enabled: true
