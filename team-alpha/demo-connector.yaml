@@ -2,18 +2,17 @@ apiVersion: platform.confluent.io/v1beta1
 kind: Connector
 metadata:
   name: replicator
-  namespace: destination
 spec:
   name: connector
-  class: "io.confluent.connect.s3.S3SinkConnector"
-  taskMax: 1
+  class: "io.confluent.connect.replicator.ReplicatorSourceConnector"
+  taskMax: 4
   configs:
-    topic: "s3_topic"
-    s3.region: "eu-west-2"
-    s3.bucket.name: "test"
-    s3.part.size: "5242880"
-    flush.size: "3"
-    storage.class: "io.confluent.connect.s3.storage.S3Storage"
-    format.class: "io.confluent.connect.s3.format.avro.AvroFormat"
-    partitioner.class: "io.confluent.connect.storage.partitioner.DefaultPartitioner"
-    schema.compatibility: "NONE"
+    topic.whitelist: "demo"
+    key.converter: "io.confluent.connect.replicator.util.ByteArrayConverter"
+    value.converter: "io.confluent.connect.replicator.util.ByteArrayConverter"
+    src.kafka.sasl.mechanism: "PLAIN"
+    src.kafka.bootstrap.servers: "kafka.team-alpha.svc.cluster.local:9071"
+    dest.kafka.bootstrap.servers: "kafka.destination.svc.cluster.local:9071"
+    src.consumer.group.id: "replicator"
+    confluent.license: ""
+    confluent.topic.replication.factor: "3"
