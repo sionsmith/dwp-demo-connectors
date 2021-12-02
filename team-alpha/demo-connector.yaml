@@ -7,12 +7,13 @@ spec:
   class: "io.confluent.connect.replicator.ReplicatorSourceConnector"
   taskMax: 4
   configs:
-    topic.whitelist: "demo"
+    topic.whitelist: "gitops4lyfe"
+    topic.rename.format: "dc_${topic}"
     key.converter: "io.confluent.connect.replicator.util.ByteArrayConverter"
     value.converter: "io.confluent.connect.replicator.util.ByteArrayConverter"
     src.kafka.sasl.mechanism: "PLAIN"
     src.kafka.bootstrap.servers: "kafka.team-alpha.svc.cluster.local:9071"
-    dest.kafka.bootstrap.servers: "kafka.destination.svc.cluster.local:9071"
+    dest.kafka.bootstrap.servers: "kafka.team-alpha.svc.cluster.local:9071"
     src.consumer.group.id: "replicator"
     confluent.license: ""
     confluent.topic.replication.factor: "3"
