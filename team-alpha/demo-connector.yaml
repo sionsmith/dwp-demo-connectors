@@ -17,6 +17,3 @@ spec:
     format.class: "io.confluent.connect.s3.format.avro.AvroFormat"
     partitioner.class: "io.confluent.connect.storage.partitioner.DefaultPartitioner"
     schema.compatibility: "NONE"
-  connectRest:
-    tls:
-      enabled: true
